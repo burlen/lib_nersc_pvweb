@@ -211,7 +211,7 @@ var nersc_pvweb = nersc_pvweb || {
             + '<h1>Log for ' + session_md.job_id + '</h1>'
             + '<h2>Session Metadata</h2>'
             + '<hr>'
-            + '<pre>' + JSON.stringify(session_md) + '</pre>'
+            + '<pre>' + JSON.stringify(session_md, null, 4) + '</pre>'
             + '<h2>Log</h2>'
             + '<hr>'
             + '<pre>' + log_str + '</pre>')

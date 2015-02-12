@@ -49,7 +49,7 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
             + '<td><input id="walltime" name="walltime" type="text" value="00:30:00"/></td></tr>'
             // account
             + '<tr><td class="nersc_pvweb_job_form_label"> Account: </td>'
-            + '<td><input id="account" name="account" type="text" value="mpccc"/></td></tr>'
+            + '<td><input id="account" name="account" type="text" value="default"/></td></tr>'
             // queue
             + '<tr><td class="nersc_pvweb_job_form_label"> Queue: </td>'
             + '<td><select id="queue" name="queue" value="debug">'
@@ -137,6 +137,7 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
         $('#del_' + session_md.uid).attr('disabled', 'disabled')
         // enable
         $('#log_' + session_md.uid).removeAttr('disabled')
+        session_md.win = null
     },
 
     // --------------------------------------------------------
@@ -158,6 +159,9 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
         // disable buttons
         $('#con_' + session_md.uid).attr('disabled', 'disabled')
         $('#del_' + session_md.uid).attr('disabled', 'disabled')
+        // enable
+        $('#log_' + session_md.uid).removeAttr('disabled')
+        session_md.win = null
     },
 
     // --------------------------------------------------------
@@ -165,10 +169,24 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
         return function() {
             console.log('connect_to_session')
             console.log(session_md)
+            // open new tab with paraview web app
             var url = nersc_pvweb_ui.web_app_url + '?sessionURL=' + encodeURIComponent(session_md.session.sessionURL)
             console.log(url)
-            //debugger
-            window.open(url,'_blank')
+            win = window.open(url,'_blank')
+            // override delete to close the tab
+            session_md.win = win
+            $('#del_' + uid).click(nersc_pvweb_ui.disconnect_from_session(session_md))
+        }
+    },
+
+    // --------------------------------------------------------
+    disconnect_from_session : function(session_md) {
+        return function() {
+            console.log('disconnect_from_session')
+            console.log(session_md)
+            session_md.win.close()
+            nersc_pvweb.delete_job_and_session(session_md)()
+            session_md.win = null
         }
     },
 
