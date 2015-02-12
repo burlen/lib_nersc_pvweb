@@ -57,8 +57,11 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
             + '<option value="premium">premium</option>'
             +  '</select></td></tr>'
             // file
-            /*+ '<tr><td class="nersc_pvweb_job_form_label"> File: </td>'
-            + '<td><input id="data_file" name="data_file" type="text" value=""/></td></tr>'*/
+            + '<tr><td class="nersc_pvweb_job_form_label"> File: </td>'
+            + '<td><select id="data_file" name="data_file" value="none">'
+            + '<option value="none"></option>'
+            + '<option value="m000_499_bighaloparticles.gio">m000_499_bighaloparticles.gio</option>'
+            + '</select></td></tr>'
             // submit
             + '<tr><th colspan="2"><button class="nersc_pvweb_button" id="submit_job">Submit</button></th></tr>'
             + '</table>')
@@ -78,12 +81,17 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
     // --------------------------------------------------------
     on_session_created : function(session_md) {
         // add a row in the job management table
+        div_type = '_even'
+        if (session_md.uid % 2) {
+            div_type = '_odd'
+        }
         $('#nersc_pvweb_job_table').append(
             '<tr id="row_' + session_md.uid + '">'
             + '<td id="job_' + session_md.uid + '"> <b>' + session_md.uid + '</b></td>'
             + '<td id="desc_' + session_md.uid + '">' + session_md.job_params.hpc_resource
             + ' ' + session_md.job_params.num_cores + ' cores '+ session_md.job_params.walltime + '</td>'
-            + '<td id="stat_' + session_md.uid + '"><img class="nersc_pvweb_busy_icon" alt="..."/></td>'
+            + '<td  style="font-weight: bold; text-align : center; margin: 1px;">'
+            + '<div class="nersc_pvweb_busy_icon' + div_type + '" id="stat_' + session_md.uid + '">...</div></td>'
             + '<td id="act_' + session_md.uid + '" valign="center">'
             + '<button class="nersc_pvweb_button" id="del_' + session_md.uid + '">Delete</button><br>'
             + '<button class="nersc_pvweb_button" id="con_' + session_md.uid + '">Connect</button><br>'
@@ -105,13 +113,15 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
     // --------------------------------------------------------
     on_job_status : function(session_md, stat_code) {
         console.log('on_job_status')
-        $('#stat_' + session_md.uid).html('<b>' + stat + '</b>')
+        $('#stat_' + session_md.uid).html('<b>' + stat_code + '</b>')
     },
 
     // --------------------------------------------------------
     on_job_ready : function(session_md) {
         console.log('on_job_ready')
-        // enable
+        // remove busy icon
+        $('#stat_' + session_md.uid).css('background', 'transparent none no-repeat center center')
+        // enable manual connect
         $('#con_' + session_md.uid).removeAttr('disabled')
         // connect to the server
         nersc_pvweb_ui.connect_to_session(session_md)()
@@ -120,6 +130,8 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
     // --------------------------------------------------------
     on_job_canceled : function(session_md) {
         console.log('on_job_canceled')
+        // remove busy icon
+        $('#stat_' + session_md.uid).css('background', 'transparent none no-repeat center center')
         // disable
         $('#con_' + session_md.uid).attr('disabled', 'disabled')
         $('#del_' + session_md.uid).attr('disabled', 'disabled')
@@ -140,6 +152,9 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
     // --------------------------------------------------------
     on_job_monitor_error : function(session_md) {
         console.log('on_job_monitor_error')
+        // remove busy icon
+        $('#stat_' + session_md.uid).css('background-image', '')
+        $('#stat_' + session_md.uid).html('<b>E!</b>')
         // disable buttons
         $('#con_' + session_md.uid).attr('disabled', 'disabled')
         $('#del_' + session_md.uid).attr('disabled', 'disabled')

@@ -207,11 +207,7 @@ var nersc_pvweb = nersc_pvweb || {
         win = window.open('_blank')
         win.document.open()
         win.document.write(''
-            + '<head><title> PVWeb Log ' + session_md.job_id + '</title>'
-            + '<style>pre {'
-            + 'width: 100%; max-width: 600px;'
-            + 'white-space: pre-wrap;'
-            + '}</style></head>'
+            + '<head><title> NERSC ParaView Web Log ' + session_md.job_id + '</title></head>'
             + '<h1>Log for ' + session_md.job_id + '</h1>'
             + '<h2>Session Metadata</h2>'
             + '<hr>'
@@ -501,11 +497,12 @@ var nersc_pvweb = nersc_pvweb || {
                 url : '/queue/' + session_md.job_params.hpc_resource + '/' + session_md.job_id,
                 type: 'GET',
                 success: function(data) {
-                    // display job status
+                    // newt got us the latest job status code
                     console.log('job ' + session_md.job_id + ' status ' + data.status)
                     console.log(session_md)
 
-                    $('#stat_' + session_md.uid).html('<b>' + data.status + '</b>')
+                    // fire job status handler
+                    nersc_pvweb.on_job_status(session_md, data.status)
 
                     if (data.status == 'R') {
                         // R -  job is running.
