@@ -11,18 +11,11 @@
 
 table.nersc_pvweb_job_form {
     background-color : white;
-    /*table-layout : fixed;*/
     border : 2px solid black;
     border-collapse : collapse;
-    width : 13em;
-    max-width : 14em;
+    width : 15em;
+    max-width : 16em;
     font-size:1em;
-}
-
-/*input, select, button { font-size:1em; }*/
-
-table.nersc_pvweb_job_form td {
-    /*width : 5em;*/
 }
 
 .nersc_pvweb_job_form th {
@@ -33,30 +26,26 @@ table.nersc_pvweb_job_form td {
     text-align: left;
     background-color: #090909;
     color: #ffffff;
-    width: 50px;
-    max-width : 50px;
+    width: 8em;
+    max-width : 8em;
 }
 
 table.nersc_pvweb_job_form input, select, button {
-    width : 5em;
+    width : 7em;
 }
 
 .nersc_pvweb_job_form_label {
-    width:10em;
+    width:12em;
     text-align:right;
     float:left;
     padding-right:4px;
 }
 
 .nersc_pvweb_job_form tr {
-    /*border : 2px solid black;*/
     font-size: 1em;
     padding: 5px 7px 4px 7px;
-    /*background-color: #696969;
-    color: #ffffff;*/
 }
 
-/* job table */
 table.nersc_pvweb_job_table {
     background-color : white;
     table-layout : fixed;
