@@ -16,7 +16,7 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
     @typedef session_metadata
     @type {object}
     @property {session_object} session - data retruned from the session_manager
-    @property {job_parameters} job_params - data describing the job
+    @property {lib_nersc_pvweb.job_parameters} job_params - data describing the job
     @property {string} job_id - batch queue job id
     @property {number} uid - unique (to this page) identifier
     @property {boolean} ready - true when safe to connect
@@ -40,7 +40,7 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
     @function launch_job
     @description launches a new ParaView web job described by the passed in
     paramters.
-    @param {job_parameters} job_params - description of the job
+    @param {lib_nersc_pvweb.job_parameters} job_params - description of the job
     @memberof lib_nersc_pvweb
     */
     launch_job : function(job_params) {
@@ -155,7 +155,7 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
     @callback on_session_created
     session creation event handler. the default implemntation
     does nothing.
-    @param {session_metadata} session_md - session metadata.
+    @param {lib_nersc_pvweb.session_metadata} session_md - session metadata.
     @see set_on_session_created
     @memberof lib_nersc_pvweb
     */
@@ -166,7 +166,7 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
     /**
     @callback on_job_status
     event handler for job status updates.
-    @param {session_metadata} session_md - session metadata
+    @param {lib_nersc_pvweb.session_metadata} session_md - session metadata
     @param {string} stat_code - status code returned from qstat
     @see set_on_job_status
     @memberof lib_nersc_pvweb
@@ -178,7 +178,7 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
     @callback on_job_ready
     event handler for 'job ready' state. at this point the
     job is running and is ready to connect to.
-    @param {session_metadata} session_md - session metadata
+    @param {lib_nersc_pvweb.session_metadata} session_md - session metadata
     @see set_on_job_ready
     @memberof lib_nersc_pvweb
     */
@@ -190,7 +190,7 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
     @callback on_job_canceled
     event handler for 'job canceled' state. at this point the
     job has ended and browser resources need to be cleaned up.
-    @param {session_metadata} session_md - session metadata
+    @param {lib_nersc_pvweb.session_metadata} session_md - session metadata
     @see set_on_job_canceled
     @memberof lib_nersc_pvweb
     */
@@ -200,7 +200,7 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
     /**
     @callback on_job_queued
     event handler for 'job queued' state.
-    @param {session_metadata} session_md - session metadata
+    @param {lib_nersc_pvweb.session_metadata} session_md - session metadata
     @see set_on_job_queued
     @memberof lib_nersc_pvweb
     */
@@ -211,7 +211,7 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
     @callback on_job_monitor_error
     event handler for a job monitor error. this is called when
     we can no longer reach NERSC systems and obtain job status.
-    @param {session_metadata} session_md - session metadata
+    @param {lib_nersc_pvweb.session_metadata} session_md - session metadata
     @see set_on_job_monitor_error
     @memberof lib_nersc_pvweb
     */
@@ -222,7 +222,7 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
     @callback on_load_log
     event handler for load_log. The default implementation opens
     a tab and displays the log data.
-    @param {session_metadata} session_md - session metadata
+    @param {lib_nersc_pvweb.session_metadata} session_md - session metadata
     @param {string} log_str - contents of the job run log
     @see set_on_load_log
     @memberof lib_nersc_pvweb
