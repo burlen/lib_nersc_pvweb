@@ -1,7 +1,7 @@
 /**
-@namespace nersc_pvweb
+@namespace lib_nersc_pvweb
 */
-var nersc_pvweb = nersc_pvweb || {
+var lib_nersc_pvweb = lib_nersc_pvweb || {
     /**
     @typedef session_data
     @type {Object}
@@ -9,7 +9,7 @@ var nersc_pvweb = nersc_pvweb || {
     @property {string} host - hostname that is the target of the web socket (localhost)
     @property {string} id - session id, key for all tranmsaactions with the session manager
     @property {string} sessionURL - url to connect with
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
 
     /**
@@ -20,7 +20,7 @@ var nersc_pvweb = nersc_pvweb || {
     @property {string} job_id - batch queue job id
     @property {number} uid - unique (to this page) identifier
     @property {boolean} ready - true when safe to connect
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
 
     /**
@@ -33,7 +33,7 @@ var nersc_pvweb = nersc_pvweb || {
     @property {string} count - account to charge compute time to
     @property {string} queue - queue to submit the job in
     @property {string} data_file - file name to load in paraview on startup
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
 
     /**
@@ -41,10 +41,10 @@ var nersc_pvweb = nersc_pvweb || {
     @description launches a new ParaView web job described by the passed in
     paramters.
     @param {job_parameters} job_params - description of the job
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     launch_job : function(job_params) {
-        nersc_pvweb.get_user_create_session_submit_job(job_params)
+        lib_nersc_pvweb.get_user_create_session_submit_job(job_params)
     },
 
 
@@ -53,10 +53,10 @@ var nersc_pvweb = nersc_pvweb || {
     @description sets the fully qualified domain name of the apache web server. by default
     set to portal-auth.nersc.gov
     @param {string} fqdn - fully quallified domain name of the apache server
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     set_web_host : function (fqdn) {
-        nersc_pvweb.web_host = fqdn
+        lib_nersc_pvweb.web_host = fqdn
     },
 
     /**
@@ -64,80 +64,80 @@ var nersc_pvweb = nersc_pvweb || {
     @description sets the path to the paraview installs on the given system.
     @param {string} sys_name - NERSC system name eg 'edison'
     @param {string} path - path to ParaView installs
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     set_paraview_prefix : function(sys_name, path) {
-        nersc_pvweb.pv_paths[sys_name] = path
+        lib_nersc_pvweb.pv_paths[sys_name] = path
     },
 
     /**
     @function set_paraview_version
     @description sets the version of paraview to use.
     @param ver - version of ParaView to use.
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     set_paraview_version : function (ver) {
-        nersc_pvweb.pv_ver_full = ver
+        lib_nersc_pvweb.pv_ver_full = ver
     },
 
     /**
     @function set_on_load_log
     @description set the callback used for on_load_log event
     @param {on_load_log} f - function to handle the event
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     set_on_load_log : function(f) {
-        nersc_pvweb.on_load_log = f
+        lib_nersc_pvweb.on_load_log = f
     },
 
     /**
     @function set_on_job_monitor_error
     @description set the event handler for job monitor_error events.
     @param {on_job_monitor_error} f - callback to handle the event
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     set_on_job_monitor_error : function(f) {
-        nersc_pvweb.on_job_monitor_error = f
+        lib_nersc_pvweb.on_job_monitor_error = f
     },
 
     /**
     @function set_on_job_queued
     @description set the event handler for job queued events.
     @param {on_job_queued} f - callback to handle the event
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     set_on_job_queued : function(f) {
-        nersc_pvweb.on_job_queued = f
+        lib_nersc_pvweb.on_job_queued = f
     },
 
     /**
     @function set_on_job_canceled
     @description set the event handler for job canceled events.
     @param {on_job_canceled} f - callback to handle the event
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     set_on_job_canceled : function(f) {
-        nersc_pvweb.on_job_canceled = f
+        lib_nersc_pvweb.on_job_canceled = f
     },
 
     /**
     @function set_on_job_ready
     @description set the event handler for job ready events.
     @param {on_job_ready} f - callback to handle the event
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     set_on_job_ready : function(f) {
-        nersc_pvweb.on_job_ready = f
+        lib_nersc_pvweb.on_job_ready = f
     },
 
     /**
     @function set_on_job_status
     @description set the event handler for job status update events.
     @param {on_job_status} f - callback to handle the event
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     set_on_job_status : function(f) {
-        nersc_pvweb.on_job_status = f
+        lib_nersc_pvweb.on_job_status = f
     },
 
     /**
@@ -145,10 +145,10 @@ var nersc_pvweb = nersc_pvweb || {
     @description set the session created event handler.
     @param {on_session_created} f - function to handle the event
     @see on_session_created
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     set_on_session_created : function(f) {
-        nersc_pvweb.on_session_created = f
+        lib_nersc_pvweb.on_session_created = f
     },
 
     /**
@@ -157,7 +157,7 @@ var nersc_pvweb = nersc_pvweb || {
     does nothing.
     @param {session_metadata} session_md - session metadata.
     @see set_on_session_created
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     on_session_created : function(session_md) {
     },
@@ -169,7 +169,7 @@ var nersc_pvweb = nersc_pvweb || {
     @param {session_metadata} session_md - session metadata
     @param {string} stat_code - status code returned from qstat
     @see set_on_job_status
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     on_job_status : function(session_md, stat_code) {
     },
@@ -180,7 +180,7 @@ var nersc_pvweb = nersc_pvweb || {
     job is running and is ready to connect to.
     @param {session_metadata} session_md - session metadata
     @see set_on_job_ready
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     on_job_ready : function(session_md) {
     },
@@ -192,7 +192,7 @@ var nersc_pvweb = nersc_pvweb || {
     job has ended and browser resources need to be cleaned up.
     @param {session_metadata} session_md - session metadata
     @see set_on_job_canceled
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     on_job_canceled : function(session_md) {
     },
@@ -202,7 +202,7 @@ var nersc_pvweb = nersc_pvweb || {
     event handler for 'job queued' state.
     @param {session_metadata} session_md - session metadata
     @see set_on_job_queued
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     on_job_queued : function(session_md) {
     },
@@ -213,7 +213,7 @@ var nersc_pvweb = nersc_pvweb || {
     we can no longer reach NERSC systems and obtain job status.
     @param {session_metadata} session_md - session metadata
     @see set_on_job_monitor_error
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     on_job_monitor_error : function(session_md) {
     },
@@ -225,7 +225,7 @@ var nersc_pvweb = nersc_pvweb || {
     @param {session_metadata} session_md - session metadata
     @param {string} log_str - contents of the job run log
     @see set_on_load_log
-    @memberof nersc_pvweb
+    @memberof lib_nersc_pvweb
     */
     on_load_log : function(session_md, log_str) {
         win = window.open('_blank')
@@ -263,8 +263,8 @@ var nersc_pvweb = nersc_pvweb || {
         $.newt_ajax({
             url : '/queue/' + host +'/' +jid,
             type : 'DELETE',
-            success : nersc_pvweb.log('deleted job ' + jid),
-            error : nersc_pvweb.error('failed to delete ' + jid)
+            success : lib_nersc_pvweb.log('deleted job ' + jid),
+            error : lib_nersc_pvweb.error('failed to delete ' + jid)
         })
     },
 
@@ -275,8 +275,8 @@ var nersc_pvweb = nersc_pvweb || {
             url : '/paraview',
             data : {'action': 'delete', 'id' : sid},
             type : 'GET',
-            success : nersc_pvweb.log('deleted session ' + sid),
-            error : nersc_pvweb.error('failed to delete session' + sid)
+            success : lib_nersc_pvweb.log('deleted session ' + sid),
+            error : lib_nersc_pvweb.error('failed to delete session' + sid)
         })
     },
 
@@ -284,8 +284,8 @@ var nersc_pvweb = nersc_pvweb || {
     delete_job_and_session : function (session_md) {
         return function() {
             console.log('delete_job_and_session')
-            nersc_pvweb.delete_job(session_md.job_params.hpc_resource, session_md.job_id)
-            nersc_pvweb.delete_session(session_md.session.id)
+            lib_nersc_pvweb.delete_job(session_md.job_params.hpc_resource, session_md.job_id)
+            lib_nersc_pvweb.delete_session(session_md.session.id)
             // diable buttons
             $('#con_' + session_md.uid).attr('disabled', 'disabled')
             $('#del_' + session_md.uid).attr('disabled', 'disabled')
@@ -298,7 +298,7 @@ var nersc_pvweb = nersc_pvweb || {
 
             // call the remote server ready script
             var cmd = 'cat $HOME/PVWEB-'
-                + nersc_pvweb.pv_ver_full + '.e' + session_md.job_id.split('.')[0]
+                + lib_nersc_pvweb.pv_ver_full + '.e' + session_md.job_id.split('.')[0]
 
             console.log(cmd)
 
@@ -314,14 +314,14 @@ var nersc_pvweb = nersc_pvweb || {
 
                     if (data.error == "") {
                         // fire event handler
-                        nersc_pvweb.on_load_log(session_md, data.output)
+                        lib_nersc_pvweb.on_load_log(session_md, data.output)
                     }
                     else {
-                        nersc_pvweb.error('failed to cat log')(session_md)
+                        lib_nersc_pvweb.error('failed to cat log')(session_md)
                     }
                 },
                 error : function (data) {
-                    nersc_pvweb.error('failed to exec cat')(session_md)
+                    lib_nersc_pvweb.error('failed to exec cat')(session_md)
                 }
             })
         }
@@ -334,8 +334,8 @@ var nersc_pvweb = nersc_pvweb || {
         $.newt_ajax({
             url : '/login/',
             type : 'GET',
-            success : nersc_pvweb.create_session_submit_job(job_params),
-            error : nersc_pvweb.error('failed to get_active_user')
+            success : lib_nersc_pvweb.create_session_submit_job(job_params),
+            error : lib_nersc_pvweb.error('failed to get_active_user')
         })
     },
 
@@ -347,7 +347,7 @@ var nersc_pvweb = nersc_pvweb || {
             console.log(auth_data)
 
             if (!auth_data['auth']) {
-                nersc_pvweb.error('user has not been authenticated')(auth_data)
+                lib_nersc_pvweb.error('user has not been authenticated')(auth_data)
                 return
             }
 
@@ -355,8 +355,8 @@ var nersc_pvweb = nersc_pvweb || {
                 url : '/paraview',
                 data : {'action': 'create', 'user' : auth_data['username']},
                 type : 'GET',
-                success : nersc_pvweb.submit_job(job_params),
-                error : nersc_pvweb.error('failed to create session')
+                success : lib_nersc_pvweb.submit_job(job_params),
+                error : lib_nersc_pvweb.error('failed to create session')
             })
         }
     },
@@ -367,14 +367,14 @@ var nersc_pvweb = nersc_pvweb || {
         console.log('set_session_lifetime')
         console.log(session_md)
 
-        walltime_s = nersc_pvweb.walltime_seconds(session_md.job_params.walltime)
+        walltime_s = lib_nersc_pvweb.walltime_seconds(session_md.job_params.walltime)
 
         $.ajax({
             url : '/paraview',
             data : {'action': 'set_lifetime', 'id' : session_md.session.id, 'lifetime' : walltime_s},
             type : 'GET',
             success : function() { console.log('set_session_lifetime:success') } ,
-            error : nersc_pvweb.error('failed to set session lifetime')
+            error : lib_nersc_pvweb.error('failed to set session lifetime')
         })
     },
 
@@ -385,8 +385,8 @@ var nersc_pvweb = nersc_pvweb || {
 
             // call the remote server ready script
             var cmd = '/bin/bash -l'
-                 + ' ' + nersc_pvweb.pv_paths[session_md.job_params.hpc_resource]
-                 + '/' + nersc_pvweb.pv_ver_full + '/pvweb_server_ready.sh'
+                 + ' ' + lib_nersc_pvweb.pv_paths[session_md.job_params.hpc_resource]
+                 + '/' + lib_nersc_pvweb.pv_ver_full + '/pvweb_server_ready.sh'
                  + ' ' + session_md.job_id;
 
             console.log(cmd)
@@ -405,36 +405,36 @@ var nersc_pvweb = nersc_pvweb || {
                         // server is up and running and waiting for
                         // connections
                         // fire event
-                        nersc_pvweb.on_job_ready(session_md)
+                        lib_nersc_pvweb.on_job_ready(session_md)
                         // set session lifetime
-                        nersc_pvweb.set_session_lifetime(session_md)
+                        lib_nersc_pvweb.set_session_lifetime(session_md)
                         // restart the job mointor
                         session_md.ready = true
-                        nersc_pvweb.monitor_job(session_md)()
+                        lib_nersc_pvweb.monitor_job(session_md)()
                     }
                     else
                     if ((res.status == 'BUSY') && (data.error == '')) {
                         // server is still starting up, check back later
-                        setTimeout(nersc_pvweb.get_server_ready(session_md), 10000);
+                        setTimeout(lib_nersc_pvweb.get_server_ready(session_md), 10000);
                     }
                     else
                     if ((res.status == 'ERROR') && (data.error == '')) {
                         // job died
                         // restart the job mointor
-                        nersc_pvweb.monitor_job(session_md)()
-                        nersc_pvweb.error('server failed to start')(session_md)
+                        lib_nersc_pvweb.monitor_job(session_md)()
+                        lib_nersc_pvweb.error('server failed to start')(session_md)
                     }
                     else {
                         // some other error
                         // restart the job mointor
-                        nersc_pvweb.monitor_job(session_md)()
-                        nersc_pvweb.error('unknown erorr' + data.error)(session_md)
+                        lib_nersc_pvweb.monitor_job(session_md)()
+                        lib_nersc_pvweb.error('unknown erorr' + data.error)(session_md)
 
                     }
                 },
                 error : function (data) {
-                    nersc_pvweb.delete_job_and_session(session_md)
-                    nersc_pvweb.error('failed to exec pvweb_server_ready')(session_md)
+                    lib_nersc_pvweb.delete_job_and_session(session_md)
+                    lib_nersc_pvweb.error('failed to exec pvweb_server_ready')(session_md)
                 }
             })
         }
@@ -451,7 +451,7 @@ var nersc_pvweb = nersc_pvweb || {
             console.log(session)
 
             // get the next unique id
-            uid = ++nersc_pvweb.job_id
+            uid = ++lib_nersc_pvweb.job_id
 
             // create session metadata
             session_md = {
@@ -463,19 +463,19 @@ var nersc_pvweb = nersc_pvweb || {
             }
 
             // trigger the session hook
-            nersc_pvweb.on_session_created(session_md)
+            lib_nersc_pvweb.on_session_created(session_md)
 
             // call the launcher script on edison
             var cmd = '/bin/bash -l'
-                 + ' ' + nersc_pvweb.pv_paths[job_params.hpc_resource]
-                 + '/' + nersc_pvweb.pv_ver_full + '/start_pvweb.sh'
+                 + ' ' + lib_nersc_pvweb.pv_paths[job_params.hpc_resource]
+                 + '/' + lib_nersc_pvweb.pv_ver_full + '/start_pvweb.sh'
                  + ' ' + job_params.num_cores
                  + ' ' + job_params.cores_per_socket
                  + ' ' + job_params.walltime
                  + ' ' + job_params.account
                  + ' ' + job_params.queue
                  + ' ' + job_params.data_file
-                 + ' ' + nersc_pvweb.web_host
+                 + ' ' + lib_nersc_pvweb.web_host
                  + ' ' + session.port;
 
             console.log(cmd)
@@ -495,17 +495,17 @@ var nersc_pvweb = nersc_pvweb || {
                         // wait until the job is running
                         session_md.job_id = res.jid
                         session_md.ready = false
-                        nersc_pvweb.monitor_job(session_md)()
+                        lib_nersc_pvweb.monitor_job(session_md)()
                         console.log(res.jid + ' submitted')
                     }
                     else {
-                        nersc_pvweb.delete_session(session_md.session.id)
-                        nersc_pvweb.error('failed to submit')(session_md)
+                        lib_nersc_pvweb.delete_session(session_md.session.id)
+                        lib_nersc_pvweb.error('failed to submit')(session_md)
                     }
                 },
                 error : function (data) {
-                    nersc_pvweb.delete_session(session.id)
-                    nersc_pvweb.error('failed to submit job')(session)
+                    lib_nersc_pvweb.delete_session(session.id)
+                    lib_nersc_pvweb.error('failed to submit job')(session)
                 }
             })
         }
@@ -526,7 +526,7 @@ var nersc_pvweb = nersc_pvweb || {
                     console.log(session_md)
 
                     // fire job status handler
-                    nersc_pvweb.on_job_status(session_md, data.status)
+                    lib_nersc_pvweb.on_job_status(session_md, data.status)
 
                     if (data.status == 'R') {
                         // R -  job is running.
@@ -536,7 +536,7 @@ var nersc_pvweb = nersc_pvweb || {
                             // wait until pvserver is up and it's
                             // safe to connect
                             // event handler
-                            nersc_pvweb.get_server_ready(session_md)()
+                            lib_nersc_pvweb.get_server_ready(session_md)()
                             return
                         }
                     }
@@ -546,9 +546,9 @@ var nersc_pvweb = nersc_pvweb || {
                         // E -  Job is exiting after having run.
                         console.log('canceled :' + session_md)
                         // delete the session
-                        nersc_pvweb.delete_session(session_md.session.id)
+                        lib_nersc_pvweb.delete_session(session_md.session.id)
                         // event handler
-                        nersc_pvweb.on_job_canceled(session_md)
+                        lib_nersc_pvweb.on_job_canceled(session_md)
                         // stop monitoring the job
                         return
                     }
@@ -559,19 +559,19 @@ var nersc_pvweb = nersc_pvweb || {
                         // W -  job is waiting for its execution time
                         // S -  (Unicos only) job is suspend.
                         // job is queued wait some more
-                        nersc_pvweb.on_job_queued(session_md)
+                        lib_nersc_pvweb.on_job_queued(session_md)
                     }
                     // continue to monitor the job
-                    setTimeout(nersc_pvweb.monitor_job(session_md), 10000);
+                    setTimeout(lib_nersc_pvweb.monitor_job(session_md), 10000);
                 },
                 error: function (data) {
                     // delete job
-                    nersc_pvweb.delete_job(session_md.hpc_ressource, session_md.job_id)
-                    nersc_pvweb.delete_session(session_md.session.id)
+                    lib_nersc_pvweb.delete_job(session_md.hpc_ressource, session_md.job_id)
+                    lib_nersc_pvweb.delete_session(session_md.session.id)
                     // event handler
-                    nersc_pvweb.on_job_monitor_error(session_md)
+                    lib_nersc_pvweb.on_job_monitor_error(session_md)
                     // report error
-                    nersc_pvweb.error('qstat failed')(data)
+                    lib_nersc_pvweb.error('qstat failed')(data)
                 }
             });
         }

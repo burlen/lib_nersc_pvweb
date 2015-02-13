@@ -1,31 +1,31 @@
 /**
-@namespace nersc_pvweb_ui
+@namespace lib_nersc_pvweb_ui
 */
-var nersc_pvweb_ui = nersc_pvweb_ui || {
+var lib_nersc_pvweb_ui = lib_nersc_pvweb_ui || {
 
     /**
     @function initialize_event_handlers
     @description Setup the event handlers that update the UI as
     jobs are created, submitted, and destroyed.
-    @memberof nersc_pvweb_ui
+    @memberof lib_nersc_pvweb_ui
     */
     initialize : function() {
-        nersc_pvweb.set_on_job_ready(nersc_pvweb_ui.on_job_ready)
-        nersc_pvweb.set_on_job_status(nersc_pvweb_ui.on_job_status)
-        nersc_pvweb.set_on_job_queued(nersc_pvweb_ui.on_job_queued)
-        nersc_pvweb.set_on_job_canceled(nersc_pvweb_ui.on_job_canceled)
-        nersc_pvweb.set_on_session_created(nersc_pvweb_ui.on_session_created)
-        nersc_pvweb.set_on_job_monitor_error(nersc_pvweb_ui.on_job_monitor_error)
+        lib_nersc_pvweb.set_on_job_ready(lib_nersc_pvweb_ui.on_job_ready)
+        lib_nersc_pvweb.set_on_job_status(lib_nersc_pvweb_ui.on_job_status)
+        lib_nersc_pvweb.set_on_job_queued(lib_nersc_pvweb_ui.on_job_queued)
+        lib_nersc_pvweb.set_on_job_canceled(lib_nersc_pvweb_ui.on_job_canceled)
+        lib_nersc_pvweb.set_on_session_created(lib_nersc_pvweb_ui.on_session_created)
+        lib_nersc_pvweb.set_on_job_monitor_error(lib_nersc_pvweb_ui.on_job_monitor_error)
     },
 
     /**
     @function set_web_app
     @description set the application to launch when jobs are up and running.
     @param url - path relative to web root of html app
-    @memberof nersc_pvweb_ui
+    @memberof lib_nersc_pvweb_ui
     */
     set_web_app : function (url) {
-        nersc_pvweb_ui.web_app_url = url
+        lib_nersc_pvweb_ui.web_app_url = url
     },
 
     /**
@@ -33,7 +33,7 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
     @description creates a table containing job submission form and inserts it into
     the passed elements inner html.
     @param {Object} container - tag into which the table is inserted
-    @memberof nersc_pvweb_ui
+    @memberof lib_nersc_pvweb_ui
     */
     create_submit_form : function (container) {
         console.log('create_submit_form')
@@ -72,7 +72,7 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
             + '<tr><th colspan="2"><button class="nersc_pvweb_button" id="submit_job">Submit</button></th></tr>'
             + '</table>')
 
-        $('#submit_job').click(nersc_pvweb_ui.submit_job)
+        $('#submit_job').click(lib_nersc_pvweb_ui.submit_job)
     },
 
     // --------------------------------------------------------
@@ -106,13 +106,13 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
             + '</tr>')
 
         // hook up handlers and disble buttons
-        $('#con_' + uid).click(nersc_pvweb_ui.connect_to_session(session_md))
+        $('#con_' + uid).click(lib_nersc_pvweb_ui.connect_to_session(session_md))
         $('#con_' + uid).attr('disabled', 'disabled')
 
-        $('#del_' + uid).click(nersc_pvweb.delete_job_and_session(session_md))
+        $('#del_' + uid).click(lib_nersc_pvweb.delete_job_and_session(session_md))
         $('#del_' + uid).attr('disabled', 'disabled')
 
-        $('#log_' + uid).click(nersc_pvweb.load_log(session_md))
+        $('#log_' + uid).click(lib_nersc_pvweb.load_log(session_md))
         $('#log_' + uid).attr('disabled', 'disabled')
     },
 
@@ -130,7 +130,7 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
         // enable manual connect
         $('#con_' + session_md.uid).removeAttr('disabled')
         // connect to the server
-        nersc_pvweb_ui.connect_to_session(session_md)()
+        lib_nersc_pvweb_ui.connect_to_session(session_md)()
     },
 
     // --------------------------------------------------------
@@ -176,12 +176,12 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
             console.log('connect_to_session')
             console.log(session_md)
             // open new tab with paraview web app
-            var url = nersc_pvweb_ui.web_app_url + '?sessionURL=' + encodeURIComponent(session_md.session.sessionURL)
+            var url = lib_nersc_pvweb_ui.web_app_url + '?sessionURL=' + encodeURIComponent(session_md.session.sessionURL)
             console.log(url)
             win = window.open(url,'_blank')
             // override delete to close the tab
             session_md.win = win
-            $('#del_' + uid).click(nersc_pvweb_ui.disconnect_from_session(session_md))
+            $('#del_' + uid).click(lib_nersc_pvweb_ui.disconnect_from_session(session_md))
         }
     },
 
@@ -191,7 +191,7 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
             console.log('disconnect_from_session')
             console.log(session_md)
             session_md.win.close()
-            nersc_pvweb.delete_job_and_session(session_md)()
+            lib_nersc_pvweb.delete_job_and_session(session_md)()
             session_md.win = null
         }
     },
@@ -215,8 +215,8 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
     // --------------------------------------------------------
     submit_job : function () {
         console.log('submit_job')
-        job_params = nersc_pvweb_ui.get_job_parameters()
-        nersc_pvweb.launch_job(job_params);
+        job_params = lib_nersc_pvweb_ui.get_job_parameters()
+        lib_nersc_pvweb.launch_job(job_params);
         return false;
     },
 
