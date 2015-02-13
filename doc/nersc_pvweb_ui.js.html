@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: nersc_pvweb_ui.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: nersc_pvweb_ui.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
 @namespace nersc_pvweb_ui
 */
 var nersc_pvweb_ui = nersc_pvweb_ui || {
@@ -38,39 +66,39 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
     create_submit_form : function (container) {
         console.log('create_submit_form')
 
-        container.html('<table class="nersc_pvweb_job_form">'
-            + '<th colspan="2">Create Job</th>'
+        container.html('&lt;table class="nersc_pvweb_job_form">'
+            + '&lt;th colspan="2">Create Job&lt;/th>'
             // system
-            + '<tr><td class="nersc_pvweb_job_form_label"> System: </td>'
-            + '<td><select id="hpc_resource" name="hpc_resource" value="edison">'
-            + '<option value="edison">Edison</option></select></td></tr>'
+            + '&lt;tr>&lt;td class="nersc_pvweb_job_form_label"> System: &lt;/td>'
+            + '&lt;td>&lt;select id="hpc_resource" name="hpc_resource" value="edison">'
+            + '&lt;option value="edison">Edison&lt;/option>&lt;/select>&lt;/td>&lt;/tr>'
             // num cores
-            + '<tr><td class="nersc_pvweb_job_form_label"> Number of Cores: </td>'
-            + '<td><input id="cores" name="cores" type="number" min="1" max="60" value="8"/></td></tr>'
+            + '&lt;tr>&lt;td class="nersc_pvweb_job_form_label"> Number of Cores: &lt;/td>'
+            + '&lt;td>&lt;input id="cores" name="cores" type="number" min="1" max="60" value="8"/>&lt;/td>&lt;/tr>'
             // cores per socket
-            + '<tr><td class="nersc_pvweb_job_form_label"> Cores per Socket: </td>'
-            + '<td><input id="cores_per_socket" name="cores_per_socket" type="number" min="1" max="12" value="8"/></td></tr>'
+            + '&lt;tr>&lt;td class="nersc_pvweb_job_form_label"> Cores per Socket: &lt;/td>'
+            + '&lt;td>&lt;input id="cores_per_socket" name="cores_per_socket" type="number" min="1" max="12" value="8"/>&lt;/td>&lt;/tr>'
             // walltime
-            + '<tr><td class="nersc_pvweb_job_form_label"> Walltime: </td>'
-            + '<td><input id="walltime" name="walltime" type="text" value="00:30:00"/></td></tr>'
+            + '&lt;tr>&lt;td class="nersc_pvweb_job_form_label"> Walltime: &lt;/td>'
+            + '&lt;td>&lt;input id="walltime" name="walltime" type="text" value="00:30:00"/>&lt;/td>&lt;/tr>'
             // account
-            + '<tr><td class="nersc_pvweb_job_form_label"> Account: </td>'
-            + '<td><input id="account" name="account" type="text" value="default"/></td></tr>'
+            + '&lt;tr>&lt;td class="nersc_pvweb_job_form_label"> Account: &lt;/td>'
+            + '&lt;td>&lt;input id="account" name="account" type="text" value="default"/>&lt;/td>&lt;/tr>'
             // queue
-            + '<tr><td class="nersc_pvweb_job_form_label"> Queue: </td>'
-            + '<td><select id="queue" name="queue" value="debug">'
-            + '<option value="debug">debug</option>'
-            + '<option value="premium">premium</option>'
-            +  '</select></td></tr>'
+            + '&lt;tr>&lt;td class="nersc_pvweb_job_form_label"> Queue: &lt;/td>'
+            + '&lt;td>&lt;select id="queue" name="queue" value="debug">'
+            + '&lt;option value="debug">debug&lt;/option>'
+            + '&lt;option value="premium">premium&lt;/option>'
+            +  '&lt;/select>&lt;/td>&lt;/tr>'
             // file
-            + '<tr><td class="nersc_pvweb_job_form_label"> File: </td>'
-            + '<td><select id="data_file" name="data_file" value="none">'
-            + '<option value="none"></option>'
-            + '<option value="m000_499_bighaloparticles.gio">m000_499_bighaloparticles.gio</option>'
-            + '</select></td></tr>'
+            + '&lt;tr>&lt;td class="nersc_pvweb_job_form_label"> File: &lt;/td>'
+            + '&lt;td>&lt;select id="data_file" name="data_file" value="none">'
+            + '&lt;option value="none">&lt;/option>'
+            + '&lt;option value="m000_499_bighaloparticles.gio">m000_499_bighaloparticles.gio&lt;/option>'
+            + '&lt;/select>&lt;/td>&lt;/tr>'
             // submit
-            + '<tr><th colspan="2"><button class="nersc_pvweb_button" id="submit_job">Submit</button></th></tr>'
-            + '</table>')
+            + '&lt;tr>&lt;th colspan="2">&lt;button class="nersc_pvweb_button" id="submit_job">Submit&lt;/button>&lt;/th>&lt;/tr>'
+            + '&lt;/table>')
 
         $('#submit_job').click(nersc_pvweb_ui.submit_job)
     },
@@ -78,9 +106,9 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
     // --------------------------------------------------------
     create_job_table : function (container) {
         console.log('create_job_table')
-        job_table = $('<table>', {class : 'nersc_pvweb_job_table', id : 'nersc_pvweb_job_table'})
+        job_table = $('&lt;table>', {class : 'nersc_pvweb_job_table', id : 'nersc_pvweb_job_table'})
         job_table.append(
-            '<tr><th>Id</th><th class="wide">Description</th><th>Status</th><th>Action</th></tr>')
+            '&lt;tr>&lt;th>Id&lt;/th>&lt;th class="wide">Description&lt;/th>&lt;th>Status&lt;/th>&lt;th>Action&lt;/th>&lt;/tr>')
         container.append(job_table);
     },
 
@@ -92,18 +120,18 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
             div_type = '_odd'
         }
         $('#nersc_pvweb_job_table').append(
-            '<tr id="row_' + session_md.uid + '">'
-            + '<td id="job_' + session_md.uid + '"> <b>' + session_md.uid + '</b></td>'
-            + '<td id="desc_' + session_md.uid + '">' + session_md.job_params.hpc_resource
-            + ' ' + session_md.job_params.num_cores + ' cores '+ session_md.job_params.walltime + '</td>'
-            + '<td  style="font-weight: bold; text-align : center; margin: 1px;">'
-            + '<div class="nersc_pvweb_busy_icon' + div_type + '" id="stat_' + session_md.uid + '">...</div></td>'
-            + '<td id="act_' + session_md.uid + '" valign="center">'
-            + '<button class="nersc_pvweb_button" id="del_' + session_md.uid + '">Delete</button><br>'
-            + '<button class="nersc_pvweb_button" id="con_' + session_md.uid + '">Connect</button><br>'
-            + '<button class="nersc_pvweb_button" id="log_' + session_md.uid + '">Log</button>'
-            + '</td>'
-            + '</tr>')
+            '&lt;tr id="row_' + session_md.uid + '">'
+            + '&lt;td id="job_' + session_md.uid + '"> &lt;b>' + session_md.uid + '&lt;/b>&lt;/td>'
+            + '&lt;td id="desc_' + session_md.uid + '">' + session_md.job_params.hpc_resource
+            + ' ' + session_md.job_params.num_cores + ' cores '+ session_md.job_params.walltime + '&lt;/td>'
+            + '&lt;td  style="font-weight: bold; text-align : center; margin: 1px;">'
+            + '&lt;div class="nersc_pvweb_busy_icon' + div_type + '" id="stat_' + session_md.uid + '">...&lt;/div>&lt;/td>'
+            + '&lt;td id="act_' + session_md.uid + '" valign="center">'
+            + '&lt;button class="nersc_pvweb_button" id="del_' + session_md.uid + '">Delete&lt;/button>&lt;br>'
+            + '&lt;button class="nersc_pvweb_button" id="con_' + session_md.uid + '">Connect&lt;/button>&lt;br>'
+            + '&lt;button class="nersc_pvweb_button" id="log_' + session_md.uid + '">Log&lt;/button>'
+            + '&lt;/td>'
+            + '&lt;/tr>')
 
         // hook up handlers and disble buttons
         $('#con_' + uid).click(nersc_pvweb_ui.connect_to_session(session_md))
@@ -119,7 +147,7 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
     // --------------------------------------------------------
     on_job_status : function(session_md, stat_code) {
         console.log('on_job_status')
-        $('#stat_' + session_md.uid).html('<b>' + stat_code + '</b>')
+        $('#stat_' + session_md.uid).html('&lt;b>' + stat_code + '&lt;/b>')
     },
 
     // --------------------------------------------------------
@@ -161,7 +189,7 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
         console.log('on_job_monitor_error')
         // remove busy icon
         $('#stat_' + session_md.uid).css('background-image', '')
-        $('#stat_' + session_md.uid).html('<b>E!</b>')
+        $('#stat_' + session_md.uid).html('&lt;b>E!&lt;/b>')
         // disable buttons
         $('#con_' + session_md.uid).attr('disabled', 'disabled')
         $('#del_' + session_md.uid).attr('disabled', 'disabled')
@@ -223,3 +251,26 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
     // --------------------------------------------------------
     web_app_url : 'apps/view_file.html',
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="nersc_pvweb.html">nersc_pvweb</a></li><li><a href="nersc_pvweb_ui.html">nersc_pvweb_ui</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Thu Feb 12 2015 16:57:16 GMT-0800 (PST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
