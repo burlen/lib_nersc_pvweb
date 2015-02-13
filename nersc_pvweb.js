@@ -1,3 +1,6 @@
+/**
+@namespace nersc_pvweb
+*/
 var nersc_pvweb = nersc_pvweb || {
     /**
     @typedef session_data
@@ -35,6 +38,7 @@ var nersc_pvweb = nersc_pvweb || {
     launches a new ParaView web job described by the passed in
     paramters.
     @param {job_parameters} job_params - description of the job
+    @memberof nersc_pvweb
     */
     launch_job : function(job_params) {
         nersc_pvweb.get_user_create_session_submit_job(job_params)
@@ -46,6 +50,7 @@ var nersc_pvweb = nersc_pvweb || {
     sets the fully qualified domain name of the apache web server. by default
     set to portal-auth.nersc.gov
     @param {string} fqdn - fully quallified domain name of the apache server
+    @memberof nersc_pvweb
     */
     set_web_host : function (fqdn) {
         nersc_pvweb.web_host = fqdn
@@ -56,6 +61,7 @@ var nersc_pvweb = nersc_pvweb || {
     sets the path to the paraview installs on the given system.
     @param sys_name - NERSC system name eg 'edison'
     @param path - path to ParaView installs
+    @memberof nersc_pvweb
     */
     set_paraview_prefix : function(sys_name, path) {
         nersc_pvweb.pv_paths[sys_name] = path
@@ -65,6 +71,7 @@ var nersc_pvweb = nersc_pvweb || {
     @function set_paraview_version
     sets the version of paraview to use.
     @param ver - version of ParaView to use.
+    @memberof nersc_pvweb
     */
     set_paraview_version : function (ver) {
         nersc_pvweb.pv_ver_full = ver
@@ -74,6 +81,7 @@ var nersc_pvweb = nersc_pvweb || {
     @function set_on_load_log
     set the callback used for on_load_log event
     @param {on_load_log} f - function to handle the event
+    @memberof nersc_pvweb
     */
     set_on_load_log : function(f) {
         nersc_pvweb.on_load_log = f
@@ -83,6 +91,7 @@ var nersc_pvweb = nersc_pvweb || {
     @function set_on_job_monitor_error
     set the event handler for job monitor_error events.
     @param {on_job_monitor_error} f - callback to handle the event
+    @memberof nersc_pvweb
     */
     set_on_job_monitor_error : function(f) {
         nersc_pvweb.on_job_monitor_error = f
@@ -92,6 +101,7 @@ var nersc_pvweb = nersc_pvweb || {
     @function set_on_job_queued
     set the event handler for job queued events.
     @param {on_job_queued} f - callback to handle the event
+    @memberof nersc_pvweb
     */
     set_on_job_queued : function(f) {
         nersc_pvweb.on_job_queued = f
@@ -101,6 +111,7 @@ var nersc_pvweb = nersc_pvweb || {
     @function set_on_job_canceled
     set the event handler for job canceled events.
     @param {on_job_canceled} f - callback to handle the event
+    @memberof nersc_pvweb
     */
     set_on_job_canceled : function(f) {
         nersc_pvweb.on_job_canceled = f
@@ -110,6 +121,7 @@ var nersc_pvweb = nersc_pvweb || {
     @function set_on_job_ready
     set the event handler for job ready events.
     @param {on_job_ready} f - callback to handle the event
+    @memberof nersc_pvweb
     */
     set_on_job_ready : function(f) {
         nersc_pvweb.on_job_ready = f
@@ -119,6 +131,7 @@ var nersc_pvweb = nersc_pvweb || {
     @function set_on_job_status
     set the event handler for job status update events.
     @param {on_job_status} f - callback to handle the event
+    @memberof nersc_pvweb
     */
     set_on_job_status : function(f) {
         nersc_pvweb.on_job_status = f
@@ -129,6 +142,7 @@ var nersc_pvweb = nersc_pvweb || {
     set the session created event handler.
     @param {on_session_created} f - function to handle the event
     @see on_session_created
+    @memberof nersc_pvweb
     */
     set_on_session_created : function(f) {
         nersc_pvweb.on_session_created = f
@@ -140,6 +154,7 @@ var nersc_pvweb = nersc_pvweb || {
     does nothing.
     @param {session_metadata} session_md - session metadata.
     @see set_on_session_created
+    @memberof nersc_pvweb
     */
     on_session_created : function(session_md) {
     },
@@ -151,6 +166,7 @@ var nersc_pvweb = nersc_pvweb || {
     @param {session_metadata} session_md - session metadata
     @param {string} stat_code - status code returned from qstat
     @see set_on_job_status
+    @memberof nersc_pvweb
     */
     on_job_status : function(session_md, stat_code) {
     },
@@ -161,6 +177,7 @@ var nersc_pvweb = nersc_pvweb || {
     job is running and is ready to connect to.
     @param {session_metadata} session_md - session metadata
     @see set_on_job_ready
+    @memberof nersc_pvweb
     */
     on_job_ready : function(session_md) {
     },
@@ -172,6 +189,7 @@ var nersc_pvweb = nersc_pvweb || {
     job has ended and browser resources need to be cleaned up.
     @param {session_metadata} session_md - session metadata
     @see set_on_job_canceled
+    @memberof nersc_pvweb
     */
     on_job_canceled : function(session_md) {
     },
@@ -181,6 +199,7 @@ var nersc_pvweb = nersc_pvweb || {
     event handler for 'job queued' state.
     @param {session_metadata} session_md - session metadata
     @see set_on_job_queued
+    @memberof nersc_pvweb
     */
     on_job_queued : function(session_md) {
     },
@@ -191,6 +210,7 @@ var nersc_pvweb = nersc_pvweb || {
     we can no longer reach NERSC systems and obtain job status.
     @param {session_metadata} session_md - session metadata
     @see set_on_job_monitor_error
+    @memberof nersc_pvweb
     */
     on_job_monitor_error : function(session_md) {
     },
@@ -202,6 +222,7 @@ var nersc_pvweb = nersc_pvweb || {
     @param {session_metadata} session_md - session metadata
     @param {string} log_str - contents of the job run log
     @see set_on_load_log
+    @memberof nersc_pvweb
     */
     on_load_log : function(session_md, log_str) {
         win = window.open('_blank')

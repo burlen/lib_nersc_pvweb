@@ -1,9 +1,13 @@
+/**
+@namespace nersc_pvweb_ui
+*/
 var nersc_pvweb_ui = nersc_pvweb_ui || {
 
     /**
     @function initialize_event_handlers
     Setup the event handlers that update the UI as
     jobs are created, submitted, and destroyed.
+    @memberof nersc_pvweb_ui
     */
     initialize : function() {
         nersc_pvweb.set_on_job_ready(nersc_pvweb_ui.on_job_ready)
@@ -18,6 +22,7 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
     @function set_web_app
     set the application to launch when jobs are up and running.
     @param url - path relative to web root of html app
+    @memberof nersc_pvweb_ui
     */
     set_web_app : function (url) {
         nersc_pvweb_ui.web_app_url = url
@@ -28,6 +33,7 @@ var nersc_pvweb_ui = nersc_pvweb_ui || {
     creates a table containing job submission form and inserts it into
     the passed elements inner html.
     @param {Object} container - tag into which the table is inserted
+    @memberof nersc_pvweb_ui
     */
     create_submit_form : function (container) {
         console.log('create_submit_form')
