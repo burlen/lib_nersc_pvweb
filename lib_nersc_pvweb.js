@@ -317,11 +317,11 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
                         lib_nersc_pvweb.on_load_log(session_md, data.output)
                     }
                     else {
-                        lib_nersc_pvweb.error('failed to cat log')(session_md)
+                        lib_nersc_pvweb.error('failed to load log')(session_md)
                     }
                 },
                 error : function (data) {
-                    lib_nersc_pvweb.error('failed to exec cat')(session_md)
+                    lib_nersc_pvweb.error('NEWT: failed load log')(session_md)
                 }
             })
         }
@@ -335,7 +335,7 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
             url : '/login/',
             type : 'GET',
             success : lib_nersc_pvweb.create_session_submit_job(job_params),
-            error : lib_nersc_pvweb.error('failed to get_active_user')
+            error : lib_nersc_pvweb.error('NEWT: failed to authenticate')
         })
     },
 
@@ -433,8 +433,12 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
                     }
                 },
                 error : function (data) {
+                    // delete session
                     lib_nersc_pvweb.delete_job_and_session(session_md)
-                    lib_nersc_pvweb.error('failed to exec pvweb_server_ready')(session_md)
+                    // fire event handler
+                    lib_nersc_pvweb.on_job_monitor_error(session_md)
+                    // error
+                    lib_nersc_pvweb.error('NEWT: failed to exec server ready')(data)
                 }
             })
         }
@@ -504,8 +508,12 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
                     }
                 },
                 error : function (data) {
+                    // delete session
                     lib_nersc_pvweb.delete_session(session.id)
-                    lib_nersc_pvweb.error('failed to submit job')(session)
+                    // fire event handler
+                    lib_nersc_pvweb.on_job_monitor_error(session_md)
+                    // report
+                    lib_nersc_pvweb.error('NEWT: failed to exec job')(data)
                 }
             })
         }
@@ -571,7 +579,7 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
                     // event handler
                     lib_nersc_pvweb.on_job_monitor_error(session_md)
                     // report error
-                    lib_nersc_pvweb.error('qstat failed')(data)
+                    lib_nersc_pvweb.error('NEWT: qstat failed')(data)
                 }
             });
         }
@@ -589,7 +597,8 @@ var lib_nersc_pvweb = lib_nersc_pvweb || {
         return function (data) {
             console.error(message)
             console.error(data)
-            alert(message)
+            str_data = JSON.stringify(data, null, 4)
+            alert('ERROR: ' + message + '\n\n' + str_data)
         }
     },
 

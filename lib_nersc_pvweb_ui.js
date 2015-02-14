@@ -160,13 +160,13 @@ var lib_nersc_pvweb_ui = lib_nersc_pvweb_ui || {
     on_job_monitor_error : function(session_md) {
         console.log('on_job_monitor_error')
         // remove busy icon
-        $('#stat_' + session_md.uid).css('background-image', '')
+        $('#stat_' + session_md.uid).css('background', 'transparent none no-repeat center center')
         $('#stat_' + session_md.uid).html('<b>E!</b>')
         // disable buttons
         $('#con_' + session_md.uid).attr('disabled', 'disabled')
         $('#del_' + session_md.uid).attr('disabled', 'disabled')
-        // enable
-        $('#log_' + session_md.uid).removeAttr('disabled')
+        // don't change state of load log button
+        //$('#log_' + session_md.uid).removeAttr('disabled')
         session_md.win = null
     },
 
