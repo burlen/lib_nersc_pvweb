@@ -28,7 +28,7 @@ function set_paraview_version(ver)
 Before launching jobs be sure to set the site specific parameters, such as your site's fully qualified domain name, path and version for ParaView installs you will use on one or more HPC reosurces.
 
 ## lib_nersc_pvweb_ui.js
-Uses lib_nersc_pvweb.js and generates a simple job management UI and launcher for ParaView web apps on NERSC systems. The following snippet shows how to use it.
+Uses lib_nersc_pvweb.js and generates a simple job management UI and launcher for ParaView web apps on NERSC systems. This is intended to be an example of building a UI around the above core library and serve as a generic web based job launcher for ParaView at NERSC. The following snippet demonstrates usage of the core and UI libraries.
 ```javascript
 <!-- NERSC ParaView Web -->
 <script src="lib/lib_nersc_pvweb/lib_nersc_pvweb.js"></script>
